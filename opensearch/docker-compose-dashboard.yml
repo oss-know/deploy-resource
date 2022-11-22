@@ -1,0 +1,21 @@
+version: '3'
+services:
+  dev-opensearch-dashboards:
+    restart: always
+    image: opensearchproject/opensearch-dashboards:latest
+    # image: opensearch-dashboards-no-security
+    container_name: dev-opensearch-dashboards
+    ports:
+      - 5601:5601
+    expose:
+      - "5601"
+    environment:
+      OPENSEARCH_HOSTS: '["https://dev-opensearch-node1:9200","https://dev-opensearch-node2:9200"]'
+    networks:
+      - oss-know-overlay
+
+networks:
+  oss-know-overlay:
+    driver: overlay
+    external: true
+
