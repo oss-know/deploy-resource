@@ -9,7 +9,7 @@ $ docker-compose -f docker-compose.yml up -d
 $ cd -
 
 # edit the docker-compose.yml's environment vars before launching
-$cd dashboard/backend
+$ cd dashboard/backend
 $ docker-compose -f docker-compose.yml up -d
 ```
 
@@ -17,7 +17,7 @@ $ docker-compose -f docker-compose.yml up -d
 
 ## Frontend Configs
 
-The web front page is made up of some compiled js, css files, then hosted statically by nginx. Usually no additional modifications is need to make it run. While the only point to care, is that the default API calls (url with prefix `/api`) is redirected to backend `http://dashboard-backend-nodejs:8008`, which can be found in the sample nginx configs in `frontend` folder. So just keep the redirected host name the same with the backend service name.
+The web front page is made up of some compiled js, css files, then hosted statically by nginx. Usually no additional modifications is need to make it run. While the only point to care, is that the default API calls (url with prefix `/api`) is redirected to backend `http://dashboard-backend-nodejs:8008`, which can be found in the sample nginx configs in `frontend` folder. So just keep the redirected host name and port binding the same with the that in backend compose files.
 
 
 
