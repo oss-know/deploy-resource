@@ -1,0 +1,21 @@
+version: '0.1'
+
+services:
+  dashboard:
+    container_name: ossknow_dashboard
+    hostname: dashboard
+    image: ossknow/dashboard:latest
+    restart: always
+    # 跨多个Docker-compose配置文件，services在一个网桥
+    networks:
+      - oss-know-overlay
+    environment:
+      - PORT=8008
+    ports:
+      - "8081:8081"
+
+
+networks:
+  oss-know-overlay:
+    driver: overlay
+    external: true
