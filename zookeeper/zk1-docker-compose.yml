@@ -2,7 +2,7 @@
 version: "3.8"
 
 networks:
-  overlay_network:
+  oss-know-overlay:
     driver: overlay
     external: true
 services:
@@ -15,7 +15,7 @@ services:
     # docker Automatically restart the container after restart
     restart: always
     networks:
-      - overlay_network
+      - oss-know-overlay
         # ipv4_address: 192.168.8.191
     #  Current container hostname
     hostname: zk01
@@ -38,7 +38,7 @@ services:
       #  ZOOKEEPER_TICK_TIME: 2000
       JVMFLAGS: "-Xms8g -Xmx8g -Dzookeeper.globalOutstandingLimit=5000"
     volumes:
-      - ./zk1_zoo.cfg:/conf/zoo.cfg
+      - ./zk_zoo.cfg:/conf/zoo.cfg
       - ./vol_zk1_data:/data
       - ./vol_zk1_datalog:/datalog
       - ./vol_zk1_logs:/logs

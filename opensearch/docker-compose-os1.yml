@@ -34,4 +34,5 @@ volumes:
 
 networks:
   oss-know-overlay:
+    driver: overlay
     external: true
