@@ -647,38 +647,6 @@
                     <password>default</password>
                 </replica>
                 <replica>
-                    <host>ch-cluster-2-1</host>
-                    <port>9000</port>
-                    <user>default</user>
-                    <password>default</password>
-                </replica>
-            </shard>
-            <shard>
-                <weight>1</weight>
-                <internal_replication>true</internal_replication>
-                <replica>
-                    <host>ch-cluster-2-0</host>
-                    <port>9000</port>
-                    <user>default</user>
-                    <password>default</password>
-                </replica>
-                <replica>
-                    <host>ch-cluster-3-1</host>
-                    <port>9000</port>
-                    <user>default</user>
-                    <password>default</password>
-                </replica>
-            </shard>
-            <shard>
-                <weight>1</weight>
-                <internal_replication>true</internal_replication>
-                <replica>
-                    <host>ch-cluster-3-0</host>
-                    <port>9000</port>
-                    <user>default</user>
-                    <password>default</password>
-                </replica>
-                <replica>
                     <host>ch-cluster-0-1</host>
                     <port>9000</port>
                     <user>default</user>
@@ -912,6 +880,7 @@
             <host>zk02</host>
             <port>2181</port>
         </node>
+	<!--
         <node index="3">
             <host>zk03</host>
             <port>2181</port>
@@ -920,6 +889,7 @@
             <host>zk04</host>
             <port>2181</port>
         </node>
+	-->
 <!--        <session_timeout_ms>30000</session_timeout_ms>-->
 <!--        <operation_timeout_ms>10000</operation_timeout_ms>-->
         <!-- Optional. Chroot suffix. Should exist. -->
