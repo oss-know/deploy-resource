@@ -647,38 +647,6 @@
                     <password>default</password>
                 </replica>
                 <replica>
-                    <host>ch-cluster-2-1</host>
-                    <port>9000</port>
-                    <user>default</user>
-                    <password>default</password>
-                </replica>
-            </shard>
-            <shard>
-                <weight>1</weight>
-                <internal_replication>true</internal_replication>
-                <replica>
-                    <host>ch-cluster-2-0</host>
-                    <port>9000</port>
-                    <user>default</user>
-                    <password>default</password>
-                </replica>
-                <replica>
-                    <host>ch-cluster-3-1</host>
-                    <port>9000</port>
-                    <user>default</user>
-                    <password>default</password>
-                </replica>
-            </shard>
-            <shard>
-                <weight>1</weight>
-                <internal_replication>true</internal_replication>
-                <replica>
-                    <host>ch-cluster-3-0</host>
-                    <port>9000</port>
-                    <user>default</user>
-                    <password>default</password>
-                </replica>
-                <replica>
                     <host>ch-cluster-0-1</host>
                     <port>9000</port>
                     <user>default</user>
