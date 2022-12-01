@@ -1,0 +1,41 @@
+# docker compose edition
+version: "3.8"
+
+networks:
+  oss-know-overlay:
+    driver: overlay
+    external: true
+services:
+  #  node 2
+  zk02:
+    #  Image name
+    image: zookeeper:3.7
+    #  Container name
+    container_name: zk02
+    # docker Automatically restart the container after restart
+    restart: always
+    networks:
+      - oss-know-overlay
+    #  Current container hostname
+    hostname: zk02
+    #  port   The host machine : Containers
+    ports:
+      - 52181:2181
+      - 58080:8080
+      - 2888:2888
+      - 3888:3888
+    expose:
+      - 2181
+      - 2888
+      - 3888
+    #  environment variable
+    environment:
+      # myid, A node in a cluster is uniquely identified
+      ZOO_MY_ID: 2
+      JVMFLAGS: "-Xms8g -Xmx8g -Dzookeeper.globalOutstandingLimit=5000"
+    volumes:
+      - ./zk_zoo.cfg:/conf/zoo.cfg
+      - ./vol_zk2_data:/data
+      - ./vol_zk2_datalog:/datalog
+      - ./vol_zk2_logs:/logs
+
