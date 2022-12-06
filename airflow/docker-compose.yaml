@@ -165,9 +165,6 @@ services:
       # See https://airflow.apache.org/docs/docker-stack/entrypoint.html#signal-propagation
       DUMB_INIT_SETSID: "0"
       LOGURU_LEVEL: "INFO"
-      HTTPS_PROXY: "http://192.168.8.60:7890"
-      HTTP_PROXY: "http://192.168.8.60:7890"
-      NO_PROXY: "192.168.8.60"
     restart: always
     # 跨多个Docker-compose配置文件，services在一个网桥
     networks:
