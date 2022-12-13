@@ -909,7 +909,7 @@
     -->
     <macros replace="replace">
         <layer>base_layer</layer>
-        <shard>base_shard_0</shard>
+        <shard>base_shard_1</shard>
         <rep>1-0</rep>
         <replica>ch-cluster-1-0</replica>
         <cluster>replicated</cluster>
