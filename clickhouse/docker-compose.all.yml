@@ -1,0 +1,91 @@
+version: '3.5'
+
+services:
+
+  ch-cluster-0-0:
+    container_name: ch-cluster-0-0
+    hostname: ch-cluster-0-0
+    image: yandex/clickhouse-server:21
+    restart: always
+    # 跨多个Docker-compose配置文件，services在一个网桥
+    networks:
+      - oss-know-overlay
+        # ipv4_address: 192.168.8.150
+    volumes:
+      - ./CH/configuration/ch-cluster-0-0/config.xml:/etc/clickhouse-server/config.xml
+      - ./CH/configuration/ch-cluster-0-0/users.xml:/etc/clickhouse-server/users.xml
+      - ./CH/data/clickhouse-data/ch-cluster-0-0:/var/lib/clickhouse
+    ports:
+      - "19000:9000"
+      - "18000:8123"
+    expose:
+      - 9000
+      - 8123
+
+  ch-cluster-0-1:
+    container_name: ch-cluster-0-1
+    hostname: ch-cluster-0-1
+    image: yandex/clickhouse-server:21
+    restart: always
+    # 跨多个Docker-compose配置文件，services在一个网桥
+    networks:
+      - oss-know-overlay
+        # ipv4_address: 192.168.8.151
+    volumes:
+      - ./CH/configuration/ch-cluster-0-1/config.xml:/etc/clickhouse-server/config.xml
+      - ./CH/configuration/ch-cluster-0-1/users.xml:/etc/clickhouse-server/users.xml
+      - ./CH/data/clickhouse-data/ch-cluster-0-1:/var/lib/clickhouse
+    ports:
+      - "19001:9000"
+      - "18001:8123"
+    expose:
+      - 9000
+      - 8123
+
+
+  ch-cluster-1-0:
+    container_name: ch-cluster-1-0
+    hostname: ch-cluster-1-0
+    image: yandex/clickhouse-server:21
+    restart: always
+    # 跨多个Docker-compose配置文件，services在一个网桥
+    networks:
+      - oss-know-overlay
+        # ipv4_address: 192.168.8.150
+    volumes:
+      - ./CH/configuration/ch-cluster-1-0/config.xml:/etc/clickhouse-server/config.xml
+      - ./CH/configuration/ch-cluster-1-0/users.xml:/etc/clickhouse-server/users.xml
+      - ./CH/data/clickhouse-data/ch-cluster-1-0:/var/lib/clickhouse
+    ports:
+      - "19002:9000"
+      - "18002:8123"
+    expose:
+      - 9000
+      - 8123
+
+  ch-cluster-1-1:
+    container_name: ch-cluster-1-1
+    hostname: ch-cluster-1-1
+    image: yandex/clickhouse-server:21
+    restart: always
+    # 跨多个Docker-compose配置文件，services在一个网桥
+    networks:
+      - oss-know-overlay
+        # ipv4_address: 192.168.8.151
+    volumes:
+      - ./CH/configuration/ch-cluster-1-1/config.xml:/etc/clickhouse-server/config.xml
+      - ./CH/configuration/ch-cluster-1-1/users.xml:/etc/clickhouse-server/users.xml
+      - ./CH/data/clickhouse-data/ch-cluster-1-1:/var/lib/clickhouse
+    ports:
+      - "19003:9000"
+      - "18003:8123"
+    expose:
+      - 9000
+      - 8123
+
+
+
+networks:
+  oss-know-overlay:
+    driver: overlay
+    external: true

@@ -1,0 +1,78 @@
+version: '3'
+services:
+  dev-opensearch-node1:
+    restart: always
+    image: opensearchproject/opensearch:latest
+    container_name: dev-opensearch-node1
+    environment:
+      # - plugins.security.disabled=true
+      - cluster.name=opensearch-cluster
+      - node.name=dev-opensearch-node1
+      - discovery.seed_hosts=dev-opensearch-node1,dev-opensearch-node2
+      - cluster.initial_master_nodes=dev-opensearch-node1,dev-opensearch-node2
+      - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
+      - "OPENSEARCH_JAVA_OPTS=-Xms2g -Xmx2g" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+      - http.max_content_length=1000mb
+      - http.compression=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536 # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
+        hard: 65536
+    volumes:
+      - ./opensearch-data1:/usr/share/opensearch/data
+    ports:
+      - 19201:9200
+      - 19601:9600 # required for Performance Analyzer
+    networks:
+      - oss-know-overlay
+
+  dev-opensearch-node2:
+    restart: always
+    image: opensearchproject/opensearch:latest
+    container_name: dev-opensearch-node2
+    environment:
+      # - plugins.security.disabled=true
+      - cluster.name=opensearch-cluster
+      - node.name=dev-opensearch-node2
+      - discovery.seed_hosts=dev-opensearch-node1,dev-opensearch-node2
+      - cluster.initial_master_nodes=dev-opensearch-node1,dev-opensearch-node2
+      - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
+      - "OPENSEARCH_JAVA_OPTS=-Xms2g -Xmx2g" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+      - http.max_content_length=1000mb
+      - http.compression=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536 # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
+        hard: 65536
+    volumes:
+      - ./opensearch-data2:/usr/share/opensearch/data
+    ports:
+      - 19202:9200
+      - 19602:9600 # required for Performance Analyzer
+    networks:
+      - oss-know-overlay
+
+  dev-opensearch-dashboards:
+    restart: always
+    image: opensearchproject/opensearch-dashboards:latest
+    # image: opensearch-dashboards-no-security
+    container_name: dev-opensearch-dashboards
+    ports:
+      - 5601:5601
+    expose:
+      - "5601"
+    environment:
+      OPENSEARCH_HOSTS: '["https://dev-opensearch-node1:9200","https://dev-opensearch-node2:9200"]'
+    networks:
+      - oss-know-overlay
+
+networks:
+  oss-know-overlay:
+    driver: overlay
+    external: true
